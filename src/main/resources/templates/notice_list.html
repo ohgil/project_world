@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/notice_list.css}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+</head>
+<body>
+<nav th:replace="layout/navbar.html"></nav>
+<div class="container-box">
+    <div class="content_box">
+        <div class="title_box">
+    <span class="order_title">
+      Notice
+    </span>
+        </div>
+        <!--  상품정보    -->
+
+        <tbody>
+        <tr th:each="notice, stat : ${paging}" th:if="${stat.index < 5}">
+
+            <td >
+                <li class="tal2"> <a th:href="@{|/notice/detail/${notice.id}|}" class="tal" >
+                    <div class="notice" >
+                        <img th:src="@{|/gen/${notice.thumbnailImg}|}"/>
+                        <div class="notice_detail">
+                            <div>
+                                <p th:text="${notice.subject}"></p>
+                            </div>
+                            <div>
+                                <p style="font-size:13px;">Create :</p>
+                                <p style="font-size:13px;" th:text="${notice.createDate}"></p>
+                            </div>
+                            <div>
+                                <p style="font-size:13px;" th:text="${notice.content}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </a></li>
+            </td>
+
+
+        </tr>
+        </tbody>
+
+    </div>
+
+    <!--페이징-->
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}" style="text-align: center;">
+        <ul class="pagination1 justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="page-link1" th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=0|}">
+                    <span><</span>
+                </a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:text="${page+1}" class="page-link1" th:href="@{|?page=${page}|}"></a>
+            </li>
+            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="page-link1" th:href="@{|?page=${paging.number+1}|}">
+                    <span>></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 페이징처리 끝-->
+
+
+</div>
+
+
+
+<footer th:replace="layout/footer.html"></footer>
+
+</body>
+</html>

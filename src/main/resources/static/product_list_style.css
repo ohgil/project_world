@@ -1,0 +1,185 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+li{
+    list-style:none;
+    text-decoration:none;
+}
+
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* 스타일 시작 */
+
+
+
+@font-face {
+    font-family: 'NeoDunggeunmoPro-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wrap>.title{
+  font-family: 'NeoDunggeunmoPro-Regular';
+}
+
+
+*{
+  margin:0;
+}
+
+/* 리스트 스타일시작 */
+
+.list-wrap{
+  text-align:center;
+  margin-top:30px;
+}
+
+.list-wrap>.list{
+  display:inline-block;
+}
+
+.list-wrap>.list>#holy{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 280px));
+  gap: 50px; /* 간격 설정 */
+}
+
+.list-wrap>.list>#holy>.a>.img-box>img{
+    width:300px;
+    height:150px;
+}
+
+.list-wrap>.list>#holy>li>a>.product-price{
+    color:white;
+    background-image: linear-gradient(to right, rgb(64,64,64), rgb(192,192,192));
+    text-align:left;
+}
+
+.list-wrap>.list>#holy>li>a>.product-price>span{
+    margin-left:10px;
+}
+
+/*페이징*/
+.page-list{
+list-style:none;
+text-align:row;
+font-size:25px;
+}
+
+.page-link{
+font-family: 'NeoDunggeunmoPro-Regular';}
+
+.holy{
+    border:2px solid white;
+      color:white;
+}
+
+.page-list>li{
+display:inline-block;
+}
+
+.page-item{
+display:inline-block;
+list-style:none;
+}
+
+.disabled{
+display:inline-block;
+}
+.page-link > a {
+    color: black;
+}
+
+
+
+
+/**이미지 호버**/
+.img-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-box::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: background-color 0.3s;
+}
+
+.img-box:hover::before {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.img-box > img {
+  position: relative;
+  transition: transform 0.3s;
+  width:300px;
+  height:150px;
+}
+
+.img-box:hover > img {
+  transform: scale(1.3);
+}
+
+.img-box::after {
+  content: "VIEW MORE";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  border: 1px solid white;
+  padding: 5px 10px 2px 10px;
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.img-box:hover::after {
+  opacity: 1;
+}
+
+.keytitle{
+font-size:30px;
+border-bottom:2px solid white;}
+
+
+
+.page-link1{
+  background-color: rgb(30, 30, 30);
+  border:2px solid #999;
+  color:#999;
+  font-size:20px;
+  padding-right:10px;
+  padding-left:10px;
+  margin-right:5px;
+  margin:left:5px;
+  font-family: 'NeoDunggeunmoPro-Regular';
+}
+
+.page-link1:hover{
+background-color: white;
+color:rgb(30, 30, 30);
+}
+.pagination1{
+margin:0;}
+
+.page-item{
+
+}
+
+.container-box1{
+background: rgb(30, 30, 30);
+  width:100%;
+}

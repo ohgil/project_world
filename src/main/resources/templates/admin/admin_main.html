@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/172203/font-awesome.min.css">
+  <link rel="stylesheet" href="/layout/admin.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default no-margin">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header fixed-brand">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+    </button>
+    <a class="navbar-brand" th:href="@{/}"><img class="rogoimg" src="https://i.postimg.cc/qRMyWWkr/image.png"/></a>
+  </div>
+  <!-- navbar-header-->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+
+    </ul>
+  </div>
+  <!-- bs-example-navbar-collapse-1 -->
+</nav>
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+      <li>
+        <a th:href="@{/admin/}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>매출</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/order}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>주문 관리</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/product}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>상품 관리</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/user}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>회원 관리</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/review}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>리뷰 관리</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/qna}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>문의사항 관리</a>
+      </li>
+      <li>
+        <a th:href="@{/admin/notice}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>공지사항 관리</a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid xyz">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>매출</h1>
+
+          <div class="date_content">
+            <div class="date_title"><p>기간별 조회. </p></div>
+            <form th:action="@{/admin/}" th:object="${adminSearchForm}" method="POST" class="date_form">
+              <div class="birthday">
+                <p>조회기간 :</p>
+                <input type="datetime-local" th:field="*{start}">
+                <p>~</p>
+                <input type="datetime-local" th:field="*{end}">
+                <button type="submit" class="date_btn"> 조회하기 </button>
+              </div>
+            </form>
+            <div class="date_data"><div>
+              <p >기간 내 판매 건 수 :</p>
+              <p th:text="${listSize}">10(타임리프)</p>
+              <p> 건</p>
+            </div>
+              <div>
+                <p>기간 내 총 매출 :</p>
+                <p th:text="${allPrice}"></p>
+                <p>won</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="date_content">
+            <div class="date_title"><p>매출 동향 </p></div>
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var priceM1 = [[${priceM1}]];
+    var priceM2 = [[${priceM2}]];
+    var priceM3 = [[${priceM3}]];
+    var priceM4 = [[${priceM4}]];
+    var priceM5 = [[${priceM5}]];
+    var month1 = '[[${month1}]]';
+    var month2 = '[[${month2}]]';
+    var month3 = '[[${month3}]]';
+    var month4 = '[[${month4}]]';
+    var month5 = '[[${month5}]]';
+
+    console.log(month4.toString())
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [month5, month4, month3, month2, month1],
+            datasets: [{
+                label: '매출 (단위 : 원)',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [priceM5, priceM4, priceM3, priceM2, priceM1]
+            }]
+        },
+    });
+</script>
+</body>
+
+
+
+</html>

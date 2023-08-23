@@ -1,0 +1,456 @@
+@font-face {
+  font-family: "NeoDunggeunmoPro-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+section {
+  font-size: 18px;
+  background: rgb(30, 30, 30);
+  margin: 0 auto;
+  color: white;
+}
+
+.inner-container {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.image-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.image-panel-img {
+  width:100%;
+  height: 600px;
+}
+
+.panel-Inner {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  max-width:100%;
+  background: rgb(30, 30, 30);
+  opacity: 0.5;
+}
+
+.panel-productName,
+.panel-developer,
+.panel-price ,
+.wish{
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+}
+
+.panel-productName{
+  position: absolute;
+  bottom: 180px;
+  left: 70px;
+}
+.panel-developer{
+  bottom: 140px;
+  left: 70px;
+}
+
+.panel-price{
+  bottom: 100px;
+  left: 70px;
+}
+.wish{
+bottom:10px;
+left:70px;
+}
+
+.panel-btn {
+  font-size: 2rem;
+  font-weight: bold;
+  background: rgb(30,30,30);
+  color: white;
+  width:150px;
+  position: absolute;
+  bottom: 50px;
+  left: 70px;
+  padding:10px 20px;
+}
+
+.panel-btn:hover {
+  background: rgb(0, 0, 0);
+  text-decoration: underline;
+}
+
+.product-detail-classification > .classify-btn-box{
+    display: flex;
+  justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+.classify-btn-box > a {
+    display: inline-block;
+    border-right: 3px solid white
+}
+
+.classify-btn-box a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.classify-btn-box > a.inquiry {
+    border-right: none;
+}
+
+
+
+
+.detail, .specification, .review, .inquiry{
+  font-size: 3rem;
+  background: rgb(30, 30, 30);
+  color:white;
+  font-weight:bold;
+  padding:0px 20px;
+  border-width: 0;
+}
+
+
+
+
+.detail-box, .form-container{
+  color:white;
+  text-align:center;
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+
+.detail-box > div{
+  margin-top:30px;
+}
+
+table {
+  width: 61%;
+  border-color: white;
+  text-align: center;
+  margin:auto;
+  margin-top:10px;
+}
+
+table th,
+table td {
+  padding: 8px;
+  border: 1px solid white;
+}
+
+.window-specification td.text-only {
+  width: 15%;
+}
+.window-specification td.list-data {
+  width: 35%;
+}
+
+.mac-specification td.text-only {
+  width: 15%;
+}
+.mac-specification td.list-data {
+  width: 35%;
+}
+
+.form-container{
+text-align:center;
+}
+
+.radio-container {
+justify-content: center;
+  display: flex;
+  gap: 5%;
+  align-items: center;
+}
+
+.radio input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin:0 5px;
+}
+
+.question-modify, .question-delete,
+.review-modify, .review-delete{
+  color:black;
+}
+
+.review-create-box{
+text-align:center;
+border-bottom:2px solid white;
+position:relative;
+height:50px;
+margin-top:50px;
+}
+.review-create-box > span{
+font-family: NeoDunggeunmoPro-Regular;
+text-shadow: 2px 2px 4px black;
+}
+
+.review-create-btn{
+  position:absolute;
+  bottom:0;
+  right:0;
+  width: 100px;
+  background: #373838;
+  color: white;
+  font-size: 15px;
+}
+.review-create-btn:hover{
+background: gray;
+}
+
+.review-list-section{
+  width: 68%;
+}
+
+.review-list-content {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.review-container {
+  width: 100%;
+  margin: 10px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding: 10px;
+  border-bottom:0.3px solid white;
+}
+
+.review-state,
+.review-author,
+.review-create-date {
+  text-align: center;
+  width: 15%;
+}
+.review-subject {
+  width: 55%;
+  cursor: pointer;
+}
+.review-subject:hover{
+color:gray;
+}
+
+.review-content {
+  display: none;
+  margin: 0 auto;
+}
+
+.review-list-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.review-list-foot ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.review-list-foot li {
+  padding: 10px;
+}
+
+.review-list-foot a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.review-list-foot .active {
+  font-weight: bold;
+}
+.review-modify, .review-delete{
+  height: 35px;
+  width: auto;
+  background: #373838;
+  color:white;
+  font-size: 20px;
+}
+.review-modify:hover{
+background-color:gray;
+}
+
+.review-delete:hover{
+background-color:gray;
+}
+
+
+.form-container{
+text-align:center;}
+
+#system-specification{
+font-family: "NeoDunggeunmoPro-Regular";
+font-size:15px;
+display:inline-block;
+position:relative;
+width: 68%;
+border-bottom:2px solid white;
+height:50px;
+margin-top:50px;
+margin-right:0;
+margin-bottom:20px;
+text-shadow: 2px 2px 4px black;
+}
+
+.question-create-box{
+text-align:center;
+border-bottom:2px solid white;
+position:relative;
+height:50px;
+margin-top:50px;
+}
+.question-create-box > span{
+font-family: NeoDunggeunmoPro-Regular;
+text-shadow: 2px 2px 4px black;
+}
+
+.question-create-btn{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width: 100px;
+    background: #373838;
+    color:white;
+    font-size: 15px;
+}
+.question-create-btn:hover{
+background: gray;
+}
+
+.question-list-section{
+  width: 68%;
+}
+
+.question-list-content {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.question-container {
+  width: 100%;
+  margin: 10px;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  padding: 10px;
+  border-bottom:0.3px solid white;
+}
+
+.question-state,
+.question-author,
+.question-create-date {
+  text-align: center;
+  width: 15%;
+}
+.question-subject {
+  width: 55%;
+  cursor: pointer;
+}
+
+.question-subject:hover{
+color:gray;
+}
+
+.question-content {
+  display: none;
+  margin: 0 auto;
+}
+
+.question-list-foot {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.question-list-foot ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.question-list-foot li {
+  padding: 10px;
+}
+
+.question-list-foot a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.question-list-foot .active {
+  font-weight: bold;
+}
+
+.question-modify, .question-delete{
+  height: 35px;
+  width: auto;
+  background: #373838;
+  color:white;
+  font-size: 20px;
+}
+.question-modify:hover{
+background-color:gray;
+}
+
+.question-delete:hover{
+background-color:gray;
+}
+
+
+.page-link1{
+  background-color: rgb(30, 30, 30);
+  border:2px solid #999;
+  color:#999;
+  font-size:20px;
+  padding-right:10px;
+  padding-left:10px;
+  margin-right:5px;
+  margin:left:5px;
+  font-family: 'NeoDunggeunmoPro-Regular';
+}
+
+.page-link1:hover{
+background-color: white;
+color:rgb(30, 30, 30);
+}
+.pagination1{
+margin:0;
+padding:0;
+}
+
+.page-item{
+ Display:inline-block;
+}
+
+
+
+.productTitle{
+    background-color:rgba(30,30,30,0.5);
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<script type="text/javascript" th:src="@{/jquery-3.7.0.min.js}"></script>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/layout/Product_form.css"/>
+    <title>world</title>
+</head>
+<nav th:replace="layout/navbar.html"></nav>
+<section class="product-form-section">
+    <form class="product-form" th:object="${productForm}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="form-container">
+            <div class="menu">게임명</div>
+            <label for="productName">
+            <input type="text" id="productName" th:field="*{productName}" placeholder="게임명을 입력해주세요">
+            </label>
+        </div>
+        <div class="form-container">
+            <div class="menu">개발사</div>
+            <label for="developer">
+            <input type="text" id="developer" th:field="*{developer}" placeholder="개발사를 입력해주세요">
+            </label>
+        </div>
+        <div class="form-container">
+            <div class="menu">장르</div>
+            <label for="theme">
+            <select type="text" id="theme" th:field="*{theme}">
+
+                <option value="">선택</option>
+                <option value="RPG">RPG</option>
+                <option value="FPS">FPS</option>
+                <option value="Thriller">스릴러</option>
+                <option value="Arcade">아케이드</option>
+                <option value="Sports">스포츠</option>
+                <option value="Simulation">시뮬레이션</option>
+                <option value="ETC">기타</option>
+            </select>
+            </label>
+        </div>
+        <div class="form-container">
+            <div class="menu">가격</div>
+            <label for="price">
+            <input type="number" id="price" value="" th:field="*{price}" placeholder="금액을 입력해주세요">
+            </label>
+        </div>
+
+        <div class="form-container">
+            <div class="menu">시스템 요구 사항</div>
+            <div class="checkbox-container" id="specification">
+                <div class="checkbox-label">
+                    <input type="checkbox" id="window" checked>
+                    <span>Window</span>
+                </div>
+                <div class="checkbox-label">
+                    <input type="checkbox" id="Mac">
+                    <span>Mac</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container" id="window-Min">
+            <div class="menu">Window 최소</div>
+            <div class="windowMin" th:each="windowMin, loop : ${windowMinList}">
+                    <input type="text" th:value="${windowMin.operatingSystem}" th:field="*{windowMinList[__${loop.index}__].operatingSystem}" placeholder="운영체제*">
+                    <input type="text" th:value="${windowMin.processor}" th:field="*{windowMinList[__${loop.index}__].processor}" placeholder="프로세서*">
+                    <input type="text" th:value="${windowMin.memory}" th:field="*{windowMinList[__${loop.index}__].memory}" placeholder="RAM*">
+                    <input type="text" th:value="${windowMin.graphics}" th:field="*{windowMinList[__${loop.index}__].graphics}" placeholder="그래픽*">
+                    <input type="text" th:value="${windowMin.storage}" th:field="*{windowMinList[__${loop.index}__].storage}" placeholder="저장공간*">
+                    <input type="text" th:value="${windowMin.directAccess}" th:field="*{windowMinList[__${loop.index}__].directAccess}" placeholder="DirectX">
+                    <input type="text" th:value="${windowMin.network}" th:field="*{windowMinList[__${loop.index}__].network}" placeholder="네트워크">
+
+            </div>
+        </div>
+
+        <div class="form-container" id="window-Recommended">
+            <div class="menu">Window 권장</div>
+            <div class="windowRecommended" th:each="windowRecommended, loop : ${windowRecommendedList}">
+                <input type="text" th:value="${windowRecommended.operatingSystem}" th:field="*{windowRecommendedList[__${loop.index}__].operatingSystem}" placeholder="운영체제*">
+                <input type="text" th:value="${windowRecommended.processor}" th:field="*{windowRecommendedList[__${loop.index}__].processor}" placeholder="프로세서*">
+                <input type="text" th:value="${windowRecommended.memory}" th:field="*{windowRecommendedList[__${loop.index}__].memory}" placeholder="RAM*">
+                <input type="text" th:value="${windowRecommended.graphics}" th:field="*{windowRecommendedList[__${loop.index}__].graphics}" placeholder="그래픽*">
+                <input type="text" th:value="${windowRecommended.storage}" th:field="*{windowRecommendedList[__${loop.index}__].storage}" placeholder="저장공간*">
+                <input type="text" th:value="${windowRecommended.directAccess}" th:field="*{windowRecommendedList[__${loop.index}__].directAccess}" placeholder="DirectX">
+                <input type="text" th:value="${windowRecommended.network}" th:field="*{windowRecommendedList[__${loop.index}__].network}" placeholder="네트워크">
+            </div>
+        </div>
+
+
+        <div class="form-container" id="Mac-Min">
+            <div class="menu">Mac 최소</div>
+            <div class="macMin" th:each="macMin, loop : ${macMinList}">
+                <input type="text" th:value="${macMin.operatingSystem}" th:field="*{macMinList[__${loop.index}__].operatingSystem}" placeholder="운영체제*">
+                <input type="text" th:value="${macMin.processor}" th:field="*{macMinList[__${loop.index}__].processor}" placeholder="프로세서*">
+                <input type="text" th:value="${macMin.memory}" th:field="*{macMinList[__${loop.index}__].memory}" placeholder="RAM*">
+                <input type="text" th:value="${macMin.graphics}" th:field="*{macMinList[__${loop.index}__].graphics}" placeholder="그래픽*">
+                <input type="text" th:value="${macMin.storage}" th:field="*{macMinList[__${loop.index}__].storage}" placeholder="저장공간*">
+                <input type="text" th:value="${macMin.directAccess}" th:field="*{macMinList[__${loop.index}__].directAccess}" placeholder="DirectX">
+                <input type="text" th:value="${macMin.network}" th:field="*{macMinList[__${loop.index}__].network}" placeholder="네트워크">
+
+            </div>
+        </div>
+
+        <div class="form-container" id="Mac-Recommended">
+            <div class="menu">Mac 권장</div>
+            <div class="macRecommended" th:each="macRecommended, loop : ${macRecommendedList}">
+                <input type="text" th:value="${macRecommended.operatingSystem}" th:field="*{macRecommendedList[__${loop.index}__].operatingSystem}" placeholder="운영체제*">
+                <input type="text" th:value="${macRecommended.processor}" th:field="*{macRecommendedList[__${loop.index}__].processor}" placeholder="프로세서*">
+                <input type="text" th:value="${macRecommended.memory}" th:field="*{macRecommendedList[__${loop.index}__].memory}" placeholder="RAM*">
+                <input type="text" th:value="${macRecommended.graphics}" th:field="*{macRecommendedList[__${loop.index}__].graphics}" placeholder="그래픽*">
+                <input type="text" th:value="${macRecommended.storage}" th:field="*{macRecommendedList[__${loop.index}__].storage}" placeholder="저장공간*">
+                <input type="text" th:value="${macRecommended.directAccess}" th:field="*{macRecommendedList[__${loop.index}__].directAccess}" placeholder="DirectX">
+                <input type="text" th:value="${macRecommended.network}" th:field="*{macRecommendedList[__${loop.index}__].network}" placeholder="네트워크">
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="menu">게임 설명</div>
+            <label for="content">
+            <textarea id="content" rows="5" th:field="*{content}" placeholder="게임설명을 입력해주세요"></textarea>
+            </label>
+        </div>
+
+        <div class="form-container">
+            <div class="menu">배너 이미지</div>
+            <div class="productImage" th:each="productImage, loop : ${productImageList}">
+                    <input class="productImage-name" type="hidden" th:value="${productImage.name}" th:field="*{productImageList[__${loop.index}__].name}">
+                <div class="main-imgUrl" style="color:white;">
+                    <input class="upload-image" type="file" th:value="${productImage.image}" th:field="*{productImageList[__${loop.index}__].image}" th:onchange="_getFileName(this)" >
+                </div>
+            </div>
+        </div>
+
+<!--        <li class="type">프로필 사진</li>-->
+<!--        <li class="content">-->
+<!--            <div class="profile-imgUrl">-->
+<!--                <div class="uploaded-file-name">프로필 사진을 업로드 해주세요.</div>-->
+<!--                <input type="file" th:value="${panelImage}" th:field="*{panelImage}"-->
+<!--                       placeholder="프로필 사진을 업로드 해주세요." th:onchange="_getFileName(this)">-->
+<!--                <label th:for="panelImage"><i class="fa-solid fa-cloud-arrow-up"></i></label>-->
+<!--            </div>-->
+<!--        </li>-->
+
+
+        <div class="product-form-btn">
+            <button class="cancel_button" type="button" id="btn_cancel">취소</button>
+            <button class="submit_button" type="submit" id="btn_submit">등록</button>
+        </div>
+    </form>
+</section>
+<footer th:replace="layout/footer.html"></footer>
+<script>
+$(document).ready(function() {
+    $("#price").val("");
+    $("#Mac-Min, #Mac-Recommended").hide().prop('disabled', true);
+
+    $("#window").on('click', function() {
+        if ($(this).prop('checked')) {
+            $("#window-Min, #window-Recommended").show().prop('disabled', false);
+        } else {
+            $("#window-Min, #window-Recommended").hide().prop('disabled', true);
+        }
+    });
+
+    $("#Mac").on('click', function() {
+        if ($(this).prop('checked')) {
+            $("#Mac-Min, #Mac-Recommended").show().prop('disabled', false);
+        } else {
+            $("#Mac-Min, #Mac-Recommended").hide().prop('disabled', true);
+        }
+    });
+
+   $('.upload-image').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $('.productImage-name').val(fileName);
+    });
+
+
+
+    $("#btn_cancel").click(function() {
+        window.location.href = "/product/list";
+    });
+
+    function _getFileName(_this) {
+        var fileValue = $(_this).val().split("\\");
+        var fileName = fileValue[fileValue.length - 1];
+
+        $(_this).siblings("div.uploaded-file-name").html(fileName);
+        $(_this).siblings("div.uploaded-file-name").addClass("active");
+    }
+});
+</script>
+</html>

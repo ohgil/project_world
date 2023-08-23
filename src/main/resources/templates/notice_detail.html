@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/notice_detail.css}" type="text/css">
+</head>
+<body>
+<nav th:replace="layout/navbar.html"></nav>
+<div class="container-box">
+    <div class="content_box">
+        <div class="title_box">
+    <span class="order_title">
+      Notice
+    </span>
+        </div>
+        <!--  상품정보    -->
+        <div class="product_title_box">
+            <span class="product_title" th:text="${notice.subject}">제목(타임리프)</span>
+            <p>작성일 :</p>
+            <p th:text="${notice.createDate}">2022-07-24(타임리프)</p>
+            <div class="product" >
+                <img th:src="@{|/gen/${notice.thumbnailImg}|}"/>
+                <p class="notice-content" th:text="${notice.content}"> 공지사항 내용(타임리프) </p>
+            </div>
+        </div>
+
+
+        <div class="product" >
+
+        </div>
+
+
+        <!--   주문상태 끝   -->
+        <div class="bt_box">
+            <a class="button" th:href="@{|/notice/list|}"><button type="button">목록보기</button></a>
+        </div>
+    </div>
+
+</div>
+
+
+
+<footer th:replace="layout/footer.html"></footer>
+</body>
+</html>

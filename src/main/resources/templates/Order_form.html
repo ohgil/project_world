@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/layout/Order.css"/>
+  <title>Hello World!</title>
+</head>
+<body>
+<nav th:replace="layout/navbar.html"></nav>
+<div class="container-box">
+  <form method="post" class="form" enctype="multipart/form-data">
+    <div class="content_box">
+      <div class="title_box">
+        <span class="order_title">
+          Order
+        </span>
+      </div>
+      <!--  상품정보    -->
+      <div class="product_title_box">
+        <span class="product_title">product</span>
+        <div class="product" th:each="productImage, loop : ${product.productImageList}">
+          <img class="image-panel-img" th:attr="src=${@commonUtil.getFilePath(productImage.image.id)}" alt="">
+          <div class="product_detail">
+            <div>
+              <p>상품명 :</p>
+              <p th:text="${product.productName}"></p>
+            </div>
+            <div>
+              <p>가격 :</p>
+              <p th:text="${product.price}"></p>
+              <p> won</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  구매자정보    -->
+      <div class="product_title_box">
+        <span class="product_title">customer</span>
+        <div class="product">
+          <div class="customer">
+            <p>회원 ID :</p>
+            <p th:text="${user.username}"></p>
+          </div>
+          <div class="customer">
+            <p>구매자명 :</p>
+            <input class="styled-input" id="customerName" type="text" name="customerName" placeholder="무통장입금 시 입금자명과 동일해야 합니다." required>
+          </div>
+          <div class="customer">
+            <p>e-mail :</p>
+            <input class="styled-input" id="email" type="text" name="email" placeholder="게임코드를 받으실 e-mail 주소를 입력해 주세요." required>
+          </div>
+        </div>
+      </div>
+      <!--   결제정보   -->
+      <div class="product_title_box">
+        <span class="product_title">payment</span>
+        <div class="product">
+          <label class="pay_check">
+            <input type="checkbox" name="payment" value="무통장입금"> 무통장입급
+          </label>
+          <label class="pay_check">
+            <input type="checkbox" name="payment" value="간편결제"> 간편결제
+          </label>
+          <div class="pay_box">
+            <div class="account_number" style="display: none;">
+              <p>무통장입금
+                카카오뱅크 3333-03-1659896 오택주</p>
+            </div>
+            <div class="toss_pay" style="display: none;">
+              <button onclick="pay();" type="button" class="btn btn-outline-primary" id="payment-button">토스 카드결제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--   결제정보 끝   -->
+      <div class="bt_box">
+        <button type="submit" class="order_button" id="btn_order">주문하기</button>
+        <button type="button" class="exit_button" id="btn_back" th:onclick="|location.href='/order/create/${product.id}'|">뒤로가기</button>
+      </div>
+    </div>
+  </form>
+</div>
+<footer th:replace="layout/footer.html"></footer>
+<script src="https://js.tosspayments.com/v1"></script>
+<script th:inline="javascript">
+  let amount = /*[[ ${product.price} ]]*/;
+  let orderName = /*[[ ${product.productName} ]]*/;
+  let productId = /*[[ ${product.id} ]]*/;
+
+  let tossPayments = TossPayments("test_ck_dP9BRQmyarYvxo5lPeL8J07KzLNk"); //테스트 클라이언트 키
+
+
+  let path = "/order/";
+  let successUrl = window.location.origin + path + "/" + productId + "/" + "success";
+  let failUrl = window.location.origin + path + "fail";
+  let callbackUrl = window.location.origin + path + "va_callback";
+  let orderId = new Date().getTime();
+
+  function pay() {
+        const method = "카드";
+        const requestJson = {
+            "productId": productId,
+            "customerName": "김월드",
+            "email": email,
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": orderName,
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        }
+        tossPayments.requestPayment(method, requestJson)
+
+  }
+
+</script>
+<script>
+  // 체크박스 선택에 따라 계좌번호를 보이거나 숨기는 함수입니다.
+  function toggleAccountNumberVisibility() {
+    var checkbox = document.querySelector('input[name="payment"][value="무통장입금"]');
+    var accountNumberDiv = document.querySelector('.account_number');
+
+    if (checkbox.checked) {
+      accountNumberDiv.style.display = 'block';
+    } else {
+      accountNumberDiv.style.display = 'none';
+    }
+  }
+
+  // 체크박스에 이벤트 리스너를 추가합니다.
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkbox = document.querySelector('input[name="payment"][value="무통장입금"]');
+    checkbox.addEventListener('change', toggleAccountNumberVisibility);
+  });
+
+  // 체크박스 선택에 따라 토스 간편결제를 보이거나 숨기는 함수입니다.
+  function toggleTossPayVisibility() {
+    var checkbox = document.querySelector('input[name="payment"][value="간편결제"]');
+    var tossPayDiv = document.querySelector('.toss_pay');
+
+    if (checkbox.checked) {
+      tossPayDiv.style.display = 'block';
+    } else {
+      tossPayDiv.style.display = 'none';
+    }
+  }
+
+  // 체크박스에 이벤트 리스너를 추가합니다.
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkbox = document.querySelector('input[name="payment"][value="간편결제"]');
+    checkbox.addEventListener('change', toggleTossPayVisibility);
+  });
+
+  // 무통장 입금 체크박스 선택 여부를 확인하는 함수입니다.
+  function isBankTransferSelected() {
+    var bankTransferCheckbox = document.querySelector('input[name="payment"][value="무통장입금"]');
+    return bankTransferCheckbox.checked;
+  }
+
+  // 간편결제 체크박스 선택 여부를 확인하는 함수입니다.
+  function isTossPaySelected() {
+    var tossPayCheckbox = document.querySelector('input[name="payment"][value="간편결제"]');
+    return tossPayCheckbox.checked;
+  }
+
+  // 체크박스 선택에 따라 중복 체크를 방지하는 함수입니다.
+  function preventCheckboxOverlap() {
+    var bankTransferCheckbox = document.querySelector('input[name="payment"][value="무통장입금"]');
+    var tossPayCheckbox = document.querySelector('input[name="payment"][value="간편결제"]');
+
+    if (isBankTransferSelected() && isTossPaySelected()) {
+      bankTransferCheckbox.checked = false;
+      toggleAccountNumberVisibility();
+      alert("결제방법은 중복체크가 불가능합니다.");
+    } else if (!isBankTransferSelected() && !isTossPaySelected()) {
+      bankTransferCheckbox.checked = true;
+      toggleAccountNumberVisibility();
+      alert("결제방법은 중복체크가 불가능합니다.");
+    } else if (isTossPaySelected()) {
+      bankTransferCheckbox.checked = false;
+      toggleAccountNumberVisibility();
+      alert("결제방법은 중복체크가 불가능합니다.");
+    } else if (!isBankTransferSelected()) {
+      tossPayCheckbox.checked = false;
+      toggleTossPayVisibility();
+      alert("결제방법은 중복체크가 불가능합니다.");
+    }
+  }
+
+  // 체크박스에 이벤트 리스너를 추가합니다.
+  document.addEventListener('DOMContentLoaded', function() {
+    var bankTransferCheckbox = document.querySelector('input[name="payment"][value="무통장입금"]');
+    var tossPayCheckbox = document.querySelector('input[name="payment"][value="간편결제"]');
+
+    bankTransferCheckbox.addEventListener('change', function() {
+      preventCheckboxOverlap();
+      toggleAccountNumberVisibility();
+    });
+
+    tossPayCheckbox.addEventListener('change', function() {
+      preventCheckboxOverlap();
+      toggleTossPayVisibility();
+    });
+  });
+</script>
+</body>
+</html>
