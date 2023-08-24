@@ -98,5 +98,5 @@ jobs:
       - name: Docker run
         run: |
           docker stop world-1 && docker rm world-1 && docker rmi ghcr.io/${{ github.actor }}/world-1:latest
-          docker run -d -p 8080:8080 --name world-1 --restart always ghcr.io/${{ github.actor }}/world-1:latest
+          docker run -d -p 80:8080 --name world-1 --restart always ghcr.io/${{ github.actor }}/world-1:latest
 
