@@ -1,21 +1,13 @@
 package com.example.world.notice;
 
-import com.example.world.product.productImage.ProductImageForm;
-import com.example.world.user.SiteUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -58,10 +50,13 @@ public class NoticeController {
 
 
     @GetMapping("/modify/{id}")
-    public String noticeModify(NoticeForm noticeForm, @PathVariable("id") Integer id) {
+    public String noticeModify(NoticeForm noticeForm, @PathVariable("id") Integer id, Model model) {
         Notice notice = this.noticeService.getNotice(id);
         noticeForm.setSubject(notice.getSubject());
         noticeForm.setContent(notice.getContent());
+
+        model.addAttribute("noticeForm",noticeForm);
+
         return "notice_form";
     }
 
@@ -74,7 +69,7 @@ public class NoticeController {
         }
         Notice notice = this.noticeService.getNotice(id);
         this.noticeService.modify(notice, noticeForm.getSubject(), noticeForm.getContent());
-        return String.format("redirect:/ad/notice");
+        return String.format("redirect:/admin/notice");
     }
 
     @GetMapping("/delete")

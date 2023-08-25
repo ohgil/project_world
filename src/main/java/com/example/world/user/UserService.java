@@ -2,18 +2,17 @@ package com.example.world.user;
 
 import com.example.world.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 import static com.example.world.user.UserRole.ADMIN;
 import static com.example.world.user.UserRole.USER;
@@ -167,7 +166,7 @@ public class UserService {
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+        authorities.add(new SimpleGrantedAuthority(ADMIN.getValue()));
 
     }
 
@@ -177,7 +176,7 @@ public class UserService {
         this.userRepository.save(user);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
+        authorities.add(new SimpleGrantedAuthority(USER.getValue()));
 
     }
 

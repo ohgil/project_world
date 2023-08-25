@@ -7,14 +7,12 @@ import com.example.world.qnaAnswer.Answer;
 import com.example.world.qnaAnswer.AnswerRepository;
 import com.example.world.user.SiteUser;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,14 +30,14 @@ public class QuestionService {
 
     public Page<Question> getListByProductId(Long productId, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
+        sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.questionRepository.findByProduct_Id(productId, pageable);
     }
 
     public Page<Question> getList(int page, int size) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
+        sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, size, Sort.by(sorts));
         return this.questionRepository.findAll(pageable);
     }
@@ -92,5 +90,14 @@ public class QuestionService {
 
     public List<Question> getAuthor(SiteUser siteUser) {
         return this.questionRepository.findByAuthor(siteUser);
+    }
+
+
+    public Page<Question> getAuthorPage(int page , SiteUser siteUser){
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));
+        return this.questionRepository.findByAuthor(pageable,siteUser);
+
     }
 }

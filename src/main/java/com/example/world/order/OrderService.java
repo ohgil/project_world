@@ -21,7 +21,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public void create(OrderForm orderForm, Product product, SiteUser user) {
+    public Long create(OrderForm orderForm, Product product, SiteUser user) {
         ProductOrder order = new ProductOrder();
         order.setProduct(product);
         order.setUser(user);
@@ -29,7 +29,9 @@ public class OrderService {
         order.setEmail(orderForm.getEmail());
         order.setPayment(orderForm.getPayment());
         order.setOrderDate(LocalDateTime.now());
-        this.orderRepository.save(order);
+        ProductOrder productOrder = this.orderRepository.save(order);
+
+        return productOrder.getId();
     }
 
     public long tossOrderCreate(Product product, SiteUser user) {
@@ -115,4 +117,10 @@ public class OrderService {
         return this.orderRepository.findAll(pageable);
     }
 
+    public Page<ProductOrder> getCustomer(int page, SiteUser user) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("orderDate"));
+        Pageable pageable = PageRequest.of(page,10,Sort.by(sorts));
+        return this.orderRepository.findByUser(pageable,user);
+    }
 }

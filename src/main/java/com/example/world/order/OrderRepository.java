@@ -1,7 +1,6 @@
 package com.example.world.order;
 
 import com.example.world.product.Product;
-import com.example.world.qna.Question;
 import com.example.world.user.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +23,6 @@ public interface OrderRepository extends JpaRepository<ProductOrder, Long> {
     Optional<ProductOrder> findByProduct(Product product);
 
     List<ProductOrder> findByUser(SiteUser siteUser);
+
+    Page<ProductOrder> findByUser(Pageable pageable, SiteUser siteUser);
 }
