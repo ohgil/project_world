@@ -50,13 +50,13 @@ datasource:
 
 file:
   root:
-    path: /home/user/file
+    path: /home/OGH/file
   resource:
-    path: file:/home/uesr/file/
+    path: file:///home/OGH/file/
   request:
     path: /file/**
   origin:
     path: /file/
 
 custom:
-  genFileDirPath: /home/user/file/notice
+  genFileDirPath: /home/OGH/file/notice
