@@ -66,7 +66,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                     user.setNickname(nickname);
                     user.setPassword("");
                     user.setRole(UserRole.valueOf("USER"));
-                    user.setBirthDate(LocalDate.parse("0000-00-00"));
+                    user.setBirthDate(LocalDate.parse("1900-01-01"));
                     userRepository.save(user);
                 }
             }
