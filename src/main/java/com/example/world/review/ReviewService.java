@@ -76,7 +76,8 @@ public class ReviewService {
         return this.reviewRepository.findAll();
     }
 
-    public void modify(Review review, String content) {
+    public void modify(int score, Review review, String content) {
+        review.setScore(score);
         review.setContent(content);
         review.setModifyDate(LocalDateTime.now());
         this.reviewRepository.save(review);

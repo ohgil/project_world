@@ -111,7 +111,7 @@ public class ReviewController {
         if (!review.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
-        this.reviewService.modify(review, reviewForm.getContent());
+        this.reviewService.modify(reviewForm.getScore(), review, reviewForm.getContent());
         return String.format("redirect:/review/detail/%s", id);
     }
 
