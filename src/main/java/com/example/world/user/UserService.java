@@ -166,7 +166,7 @@ public class UserService {
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(ADMIN.getValue()));
+        authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
 
     }
 
@@ -176,7 +176,7 @@ public class UserService {
         this.userRepository.save(user);
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(USER.getValue()));
+        authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
 
     }
 
