@@ -421,7 +421,7 @@ public class AdminController {
 
     //////공지사항작성///////
     @GetMapping("/notice/create")
-    public String noticeCreate(){
+    public String noticeCreate(NoticeForm noticeForm){
         return "notice_form";
     }
 
