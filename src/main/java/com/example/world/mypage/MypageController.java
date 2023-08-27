@@ -36,6 +36,7 @@ public class MypageController {
     private final ProductService productService;
 
     @GetMapping("")
+    @PreAuthorize("isAuthenticated()")
     public String mypageMain(Model model , Principal principal){
         SiteUser siteUser = this.userService.getUser(principal.getName());
         SiteUser user = this.userService.getUser(principal.getName());
@@ -58,6 +59,7 @@ public class MypageController {
         return "/mypage/Mypage_main";
     }
     @GetMapping("/order")
+    @PreAuthorize("isAuthenticated()")
     public String myOrder(Model model, Principal principal, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "size", defaultValue = "10") int size){
         SiteUser user = this.userService.getUser(principal.getName());
         Page<ProductOrder> paging = this.orderService.getCustomer(page, user);
@@ -138,6 +140,7 @@ public class MypageController {
     }
 
     @GetMapping("/review")
+    @PreAuthorize("isAuthenticated()")
     public String myReview(Model model, Principal principal, ReviewForm reviewForm, @RequestParam(value = "page", defaultValue = "0") int page) {
         SiteUser siteUser = this.userService.getUser(principal.getName());
 
