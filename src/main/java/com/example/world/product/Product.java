@@ -34,7 +34,6 @@ public class Product {
 //    @ManyToOne
 //    private SiteUser username;
 
-    @Size(max = 30)
     private String productName;
     // 게임 이름
 
