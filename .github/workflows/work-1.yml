@@ -104,7 +104,7 @@ jobs:
 
       - name: Run Docker Container with Volume
         run: |
-          docker run -d --name world-1 -v my-volume:/home/world/file -p 8080:8080 world-1:latest
+          docker run -d --name world-1 -v my-volume:/home/world/file -p 8080:8080 ghcr.io/${{ github.actor }}/world-1:latest
 
       - name: Login to ghcr
         uses: docker/login-action@v1
