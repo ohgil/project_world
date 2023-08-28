@@ -195,10 +195,10 @@ public class AdminController {
 
                 mailSender.send(mail);
 
-                return "성공";
+                return "redirect:/admin/order";
             } catch (Exception e) {
                 e.printStackTrace();
-                return "실패";
+                return "redirect:/admin/order";
             }
         } else {
             return "redirect:/admin/";
