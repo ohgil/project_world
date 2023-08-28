@@ -211,6 +211,13 @@ text-shadow: 2px 2px 4px black;
 background: gray;
 }
 
+.detail-content {
+        display: inline-block;
+        width: 68%;
+        word-wrap:break-word;
+        font-size:1.6rem;
+}
+
 .review-list-section{
   width: 68%;
 }
