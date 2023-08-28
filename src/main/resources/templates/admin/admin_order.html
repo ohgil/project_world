@@ -175,7 +175,7 @@
     if (selectedOrderId !== null && shipmentCode !== "") {
         $.ajax({
             type: "GET",
-            url: `/admin/code/${selectedOrderId}`,
+            url: "/admin/code/" + selectedOrderId,
             data: {
                 sendCode: shipmentCode
             },
